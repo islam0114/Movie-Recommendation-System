@@ -5,17 +5,12 @@ from sklearn.metrics.pairwise import cosine_similarity
 import requests
 import time
 
-# --------------------------
-# Page Config
-# --------------------------
 st.set_page_config(
     page_title="Movie Recommender",
     page_icon="🎬",
     layout="wide"
 )
-# --------------------------
-# TMDb & OMDB API Config
-# --------------------------
+
 TMDB_API_KEY = "c67407b2ec323db843bf5d5cde43ccec"
 OMDB_API_KEY = "d490fe65"
 TMDB_BASE = "https://api.themoviedb.org/3/find/{}?api_key={}&external_source=imdb_id"
@@ -23,9 +18,6 @@ OMDB_BASE = "http://www.omdbapi.com/?i={}&apikey={}"
 IMG_BASE = "https://image.tmdb.org/t/p/w500"
 FALLBACK_URL = "https://via.placeholder.com/500x750?text=No+Poster"
 
-# --------------------------
-# Load Pickle Data
-# --------------------------
 @st.cache_resource
 def load_model():
     with open("Deployment/model.joblib", "rb") as f:
@@ -37,9 +29,6 @@ movies = data["movies"]
 X_full = data["X_full"]
 indices = data["indices"]
 
-# --------------------------
-# Poster Fetch Function
-# --------------------------
 @st.cache_data(show_spinner=False)
 def fetch_poster(imdb_id):
     if pd.isna(imdb_id) or imdb_id == "":
@@ -60,9 +49,6 @@ def fetch_poster(imdb_id):
         pass
     return FALLBACK_URL
 
-# --------------------------
-# Recommendation Function
-# --------------------------
 def recommend(title, top_n=20):
     title = title.strip()
     if title not in indices:
@@ -89,17 +75,11 @@ def recommend(title, top_n=20):
     results = results.drop_duplicates(subset="title").head(top_n).reset_index(drop=True)
     return results
 
-# --------------------------
-# Streamlit App
-# --------------------------
 st.title("🎬 Movie Recommendation System")
 st.markdown("Find similar movies and explore top movies by genre.")
 
 page = st.sidebar.radio("📂 Choose Page:", ["Find Similar Movies", "Explore by Genre"])
 
-# --------------------------
-# Display Function with Progress
-# --------------------------
 def display_movies_grid(df, n_cols=5):
     rows = df.to_dict(orient="records")
     progress = st.progress(0)
@@ -116,12 +96,9 @@ def display_movies_grid(df, n_cols=5):
                 else:
                     st.write(f"⭐ {movie['vote_average']} | 🔥 {movie.get('vote_count', 0)}")
         progress.progress(min((i+n_cols)/total,1.0))
-        time.sleep(0.1)  # صغير لتحديث الشاشة بسلاسة
+        time.sleep(0.1) 
     progress.empty()
 
-# --------------------------
-# Page 1: Find Similar Movies
-# --------------------------
 if page == "Find Similar Movies":
     st.header("🔍 Find Similar Movies")
     movie_choice = st.selectbox("🎬 Select a movie:", movies['title'].values)
@@ -133,9 +110,6 @@ if page == "Find Similar Movies":
             st.subheader(f"Top 20 Movies Similar to: {movie_choice}")
             display_movies_grid(results, n_cols=5)
 
-# --------------------------
-# Page 2: Explore by Genre
-# --------------------------
 elif page == "Explore by Genre":
     st.header("📊 Explore Movies by Genre")
     genre_columns = [
@@ -152,6 +126,7 @@ elif page == "Explore by Genre":
                     .head(20)
         st.subheader(f"🎭 Top 20 {selected_genre} Movies")
         display_movies_grid(top20, n_cols=5)
+
 
 
 
