@@ -12,20 +12,20 @@ It allows users to:
 
 ## Project Structure  
 
-Movie-Recommendation-System/
-│
-├── Code/
-│ └── Movie_Recommendation_System.ipynb # Main notebook for experiments and modeling
-│
-├── Data/
-│ └── Movies_Clean.csv # Cleaned dataset
-│
-├── Deployment/
-│ ├── App.py # Streamlit web app
-│ ├── model.joblib # Trained model
-│ └── requirements.txt # Dependencies
-│
-└── README.md # This file
+Movie-Recommendation-System/  
+│  
+├── Code/  
+│ └── Movie_Recommendation_System.ipynb # Main notebook for experiments and modeling  
+│  
+├── Data/  
+│ └── Movies_Clean.csv # Cleaned dataset  
+│  
+├── Deployment/  
+│ ├── App.py # Streamlit web app  
+│ ├── model.joblib # Trained model  
+│ └── requirements.txt # Dependencies  
+│  
+└── README.md   
 
 ---
 
