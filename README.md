@@ -46,5 +46,11 @@ The dataset is based on TMDb Movies Dataset, cleaned and stored in:
 
 ---
 
+## Deployment
+Demo: `https://movie-recommendation-system-test.streamlit.app/`
+
+
+---
+
 ## Author
 `Islam Mohamed`
