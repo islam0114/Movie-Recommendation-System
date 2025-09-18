@@ -10,7 +10,7 @@ import time
 # --------------------------
 st.set_page_config(
     page_title="Movie Recommender",
-    page_icon="https://image.tmdb.org/t/p/w500/8uO0gUM8aNqYLs1OsTBQiXu0fEv.jpg",
+    page_icon="🎬",
     layout="wide"
 )
 # --------------------------
@@ -152,6 +152,7 @@ elif page == "Explore by Genre":
                     .head(20)
         st.subheader(f"🎭 Top 20 {selected_genre} Movies")
         display_movies_grid(top20, n_cols=5)
+
 
 
 
