@@ -1,4 +1,4 @@
-import streamlit as st
+oymimport streamlit as st
 import pandas as pd
 import pickle
 from sklearn.metrics.pairwise import cosine_similarity
@@ -25,7 +25,7 @@ FALLBACK_URL = "https://via.placeholder.com/500x750?text=No+Poster"
 # --------------------------
 @st.cache_resource
 def load_model():
-    with open("model.pkl", "rb") as f:
+    with open("Deployment/model.pkl", "rb") as f:
         data = pickle.load(f)
     return data
 
@@ -149,3 +149,4 @@ elif page == "Explore by Genre":
                     .head(20)
         st.subheader(f"🎭 Top 20 {selected_genre} Movies")
         display_movies_grid(top20, n_cols=5)
+
