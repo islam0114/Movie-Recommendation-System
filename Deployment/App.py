@@ -1,4 +1,4 @@
-oymimport streamlit as st
+import streamlit as st
 import pandas as pd
 import pickle
 from sklearn.metrics.pairwise import cosine_similarity
@@ -149,5 +149,6 @@ elif page == "Explore by Genre":
                     .head(20)
         st.subheader(f"🎭 Top 20 {selected_genre} Movies")
         display_movies_grid(top20, n_cols=5)
+
 
 
